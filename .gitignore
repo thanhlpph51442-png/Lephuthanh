@@ -1,0 +1,7 @@
+# Git ignore for Ban Do Tet Viet
+git/
+*.log
+temp_chrome/
+scratch*/
+.vscode/
+.idea/

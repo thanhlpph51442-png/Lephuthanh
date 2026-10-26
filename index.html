@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bản Đồ Tết Việt - Khám Phá Nét Đẹp Tết Ba Miền Bắc Trung Nam</title>
+  <meta name="description" content="Khám phá sự khác nhau về phong tục, món ăn truyền thống và những điều kiêng kỵ trong dịp Tết Nguyên Đán ở ba miền Bắc – Trung – Nam với bản đồ tương tác sống động." />
+  <meta name="keywords" content="Bản đồ Tết Việt, Tết Nguyên Đán, phong tục Tết ba miền, món ăn ngày Tết, bánh chưng, bánh tét, hoa đào, hoa mai, kiêng kỵ ngày Tết" />
+  <meta name="author" content="Bản Đồ Tết Việt" />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Bản Đồ Tết Việt - Khám Phá Nét Đẹp Tết Ba Miền" />
+  <meta property="og:description" content="Website tương tác khám phá phong tục, ẩm thực và kiêng kỵ Tết Nguyên Đán ba miền Bắc - Trung - Nam." />
+  <meta property="og:type" content="website" />
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Hiệu ứng cánh hoa xuân rơi tự nhiên (Canvas) -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Container hạt pháo hoa bốc lì xì -->
+  <div id="confetti-container"></div>
+
+  <!-- ==========================================================================
+       HEADER & THANH ĐIỀU HƯỚNG CHÍNH
+       ========================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-inner">
+      <!-- Logo thương hiệu -->
+      <a href="#hero" class="brand-logo" id="brand-logo-link">
+        <span class="brand-emblem">🌸</span>
+        <div class="brand-text">
+          <h1 class="text-gold-gradient">BẢN ĐỒ TẾT VIỆT</h1>
+          <p>Khám phá văn hóa Tết ba miền</p>
+        </div>
+      </a>
+
+      <!-- Menu liên kết chính -->
+      <nav>
+        <ul class="nav-links" id="desktop-nav-links">
+          <li><a href="#hero" id="nav-home">🏠 Trang chủ</a></li>
+          <li><a href="#map-section" id="nav-map">🗺️ Bản đồ Tết</a></li>
+          <li><a href="#region-showcase" id="nav-regions">📍 Ba miền</a></li>
+          <li><a href="#customs-section" id="nav-customs">🎋 Phong tục</a></li>
+          <li><a href="#compare-section" id="nav-compare">⚖️ So sánh</a></li>
+          <li><a href="#lucky-section" id="nav-lucky">🧧 Bốc quẻ lì xì</a></li>
+          <li><a href="#about-section" id="nav-about">ℹ️ Giới thiệu</a></li>
+        </ul>
+      </nav>
+
+      <!-- Phím chức năng điều khiển âm thanh & hiệu ứng -->
+      <div class="nav-actions">
+        <button class="btn-ctrl" id="toggle-sound-btn" title="Bật âm thanh không khí Tết" aria-label="Bật/Tắt âm thanh">
+          <span class="btn-icon">🔇</span>
+          <span class="btn-text">Âm thanh</span>
+        </button>
+
+        <button class="btn-ctrl active" id="toggle-petals-btn" title="Tắt hiệu ứng hoa rơi" aria-label="Bật/Tắt hoa rơi">
+          <span>🌸</span>
+          <span>Hoa rơi</span>
+        </button>
+
+        <a href="https://github.com/thanhlpph51442-png/Lephuthanh" target="_blank" rel="noopener noreferrer" class="btn-ctrl github-btn" title="Kho mã nguồn GitHub: thanhlpph51442-png/Lephuthanh" aria-label="Xem GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <button class="menu-toggle" id="menu-toggle-btn" aria-label="Mở menu">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <a href="#hero">🏠 Trang chủ</a>
+      <a href="#map-section">🗺️ Bản đồ Tết</a>
+      <a href="#region-showcase">📍 Khám phá ba miền</a>
+      <a href="#customs-section">🎋 Phong tục & Ẩm thực</a>
+      <a href="#compare-section">⚖️ So sánh ba miền</a>
+      <a href="#lucky-section">🧧 Bốc quẻ lì xì</a>
+      <a href="#about-section">ℹ️ Giới thiệu</a>
+      <a href="https://github.com/thanhlpph51442-png/Lephuthanh" target="_blank" rel="noopener noreferrer">📦 GitHub Repository</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION: BANNER TRANG CHÍNH
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <!-- Lồng đèn đỏ đu đưa -->
+      <div class="hanging-lantern lantern-left" aria-hidden="true"></div>
+      <div class="hanging-lantern lantern-right" aria-hidden="true"></div>
+
+      <!-- Câu đối Tết hai bên -->
+      <div class="couplet-banner couplet-left" aria-hidden="true">
+        Tân Niên Vạn Phúc Bình An Đến
+      </div>
+      <div class="couplet-banner couplet-right" aria-hidden="true">
+        Xuân Mới Đa Tài Phú Quý Lai
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-pill-badge">
+          <span>🏮 Mừng Xuân Ất Tỵ 2025 - Bính Ngọ 2026</span>
+        </div>
+
+        <h1 class="hero-title text-gold-gradient">BẢN ĐỒ TẾT VIỆT</h1>
+        <p class="hero-slogan">“Khám phá nét đẹp Tết Việt qua ba miền”</p>
+        <p class="hero-desc">
+          Dọc theo dải đất hình chữ S, mỗi vùng miền mang một sắc thái riêng biệt về phong tục, hương vị mâm cỗ và những kiêng cử đầu xuân. Hãy cùng khám phá sự đa dạng văn hóa rực rỡ của ngày Tết Cổ Truyền Việt Nam!
+        </p>
+
+        <div class="hero-actions">
+          <a href="#map-section" class="btn btn-primary" id="btn-explore-map">
+            <span>🗺️ Khám Phá Bản Đồ Ngay</span>
+          </a>
+          <a href="#compare-section" class="btn btn-secondary" id="btn-quick-compare">
+            <span>⚖️ So Sánh Nhanh Ba Miền</span>
+          </a>
+          <a href="#lucky-section" class="btn btn-gold" id="btn-hero-lucky">
+            <span>🧧 Hái Lộc Đầu Năm</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MỤC BẢN ĐỒ TẾT TƯƠNG TÁC (INTERACTIVE VIETNAM MAP)
+         ========================================================================== -->
+    <section class="map-section" id="map-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Bản Đồ Tương Tác</span>
+          <h2 class="section-title text-gold-gradient">Chọn Vùng Miền Bạn Muốn Khám Phá</h2>
+          <p class="section-subtitle">
+            Chạm vào từng miền trên bản đồ hoặc dùng thanh chọn nhanh bên dưới để xem chi tiết phong tục, mâm cỗ đặc sản và điều kiêng kỵ ngày Tết.
+          </p>
+        </div>
+
+        <!-- Thanh chọn nhanh vùng miền (tiện lợi trên cả điện thoại) -->
+        <div class="region-tabs-bar" role="tablist">
+          <button class="region-tab-btn active" data-region="bac" id="tab-btn-bac" role="tab" aria-selected="true">
+            <span>🏔️ Miền Bắc</span>
+            <span class="btn-badge">Hoa Đào & Bánh Chưng</span>
+          </button>
+          <button class="region-tab-btn" data-region="trung" id="tab-btn-trung" role="tab" aria-selected="false">
+            <span>🌊 Miền Trung</span>
+            <span class="btn-badge">Bánh Tét & Dưa Món</span>
+          </button>
+          <button class="region-tab-btn" data-region="nam" id="tab-btn-nam" role="tab" aria-selected="false">
+            <span>🌴 Miền Nam</span>
+            <span class="btn-badge">Hoa Mai & Thịt Kho Tàu</span>
+          </button>
+        </div>
+
+        <!-- Khung chứa bản đồ SVG tương tác & Bảng hướng dẫn bên cạnh -->
+        <div class="map-interactive-container">
+          <!-- Bản đồ SVG Việt Nam -->
+          <div class="map-wrapper">
+            <!-- Tooltip nổi khi hover trên bản đồ -->
+            <div class="map-tooltip" id="map-tooltip"></div>
+
+            <svg class="vietnam-svg" viewBox="0 0 520 860" xmlns="http://www.w3.org/2000/svg" aria-label="Bản đồ tương tác ba miền Việt Nam">
+              <defs>
+                <!-- Gradient Miền Bắc (Sắc Đào Thắm) -->
+                <linearGradient id="grad-north" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#E11D48" />
+                  <stop offset="100%" stop-color="#991B1B" />
+                </linearGradient>
+
+                <!-- Gradient Miền Trung (Sắc Nắng Vàng Biển Trời) -->
+                <linearGradient id="grad-central" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FB923C" />
+                  <stop offset="100%" stop-color="#C2410C" />
+                </linearGradient>
+
+                <!-- Gradient Miền Nam (Sắc Mai Vàng Rực Rỡ) -->
+                <linearGradient id="grad-south" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FDE047" />
+                  <stop offset="100%" stop-color="#CA8A04" />
+                </linearGradient>
+
+                <!-- Filter Glow Hiệu Ứng Phát Sáng -->
+                <filter id="glow-effect" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <!-- MIỀN BẮC (North Vietnam) -->
+              <g id="group-north">
+                <path class="vn-region region-north active" data-region="bac" id="svg-region-bac"
+                  d="M 125,120
+                     C 135,95 170,60 215,55
+                     C 255,50 280,38 310,48
+                     C 340,58 355,85 365,115
+                     C 375,135 345,155 315,160
+                     C 290,165 280,185 275,215
+                     C 260,215 240,210 230,195
+                     C 215,175 195,170 170,170
+                     C 145,170 120,150 125,120 Z" />
+              </g>
+
+              <!-- MIỀN TRUNG (Central Vietnam & Western Highlands) -->
+              <g id="group-central">
+                <path class="vn-region region-central" data-region="trung" id="svg-region-trung"
+                  d="M 275,215
+                     C 285,235 295,265 305,295
+                     C 315,325 330,355 350,380
+                     C 370,405 385,445 395,490
+                     C 405,530 385,570 355,595
+                     C 335,585 315,555 310,515
+                     C 305,475 290,440 285,395
+                     C 280,350 260,310 250,270
+                     C 245,245 260,225 275,215 Z" />
+              </g>
+
+              <!-- MIỀN NAM (South Vietnam & Mekong Delta) -->
+              <g id="group-south">
+                <path class="vn-region region-south" data-region="nam" id="svg-region-nam"
+                  d="M 355,595
+                     C 370,610 365,635 340,655
+                     C 320,670 295,680 270,705
+                     C 245,730 230,760 220,745
+                     C 205,720 220,685 245,665
+                     C 270,645 285,630 310,615
+                     C 330,600 345,590 355,595 Z" />
+              </g>
+
+              <!-- BIỂN ĐẢO QUÊ HƯƠNG: ĐẢO PHÚ QUỐC -->
+              <g id="group-phu-quoc">
+                <ellipse cx="175" cy="705" rx="14" ry="22" transform="rotate(-25 175 705)" class="island-path" />
+                <text x="175" y="740" class="island-label">Đảo Phú Quốc</text>
+              </g>
+
+              <!-- BIỂN ĐẢO QUÊ HƯƠNG: CÔN ĐẢO -->
+              <g id="group-con-dao">
+                <ellipse cx="305" cy="745" rx="6" ry="9" class="island-path" />
+                <text x="310" y="765" class="island-label">Côn Đảo</text>
+              </g>
+
+              <!-- QUẦN ĐẢO HOÀNG SA (VIỆT NAM) -->
+              <g id="group-hoang-sa">
+                <!-- Cụm đảo nhỏ -->
+                <circle cx="435" cy="360" r="4.5" class="island-path" />
+                <circle cx="445" cy="355" r="3.5" class="island-path" />
+                <circle cx="450" cy="370" r="4" class="island-path" />
+                <circle cx="438" cy="380" r="3" class="island-path" />
+                <text x="445" y="405" class="island-label">Q.Đ HOÀNG SA</text>
+                <text x="445" y="420" class="island-label" style="font-size:9px; fill:#FEF08A;">(VIỆT NAM)</text>
+              </g>
+
+              <!-- QUẦN ĐẢO TRƯỜNG SA (VIỆT NAM) -->
+              <g id="group-truong-sa">
+                <circle cx="430" cy="620" r="4" class="island-path" />
+                <circle cx="450" cy="640" r="5" class="island-path" />
+                <circle cx="435" cy="665" r="4.5" class="island-path" />
+                <circle cx="465" cy="685" r="5.5" class="island-path" />
+                <circle cx="420" cy="695" r="4" class="island-path" />
+                <text x="445" y="725" class="island-label">Q.Đ TRƯỜNG SA</text>
+                <text x="445" y="740" class="island-label" style="font-size:9px; fill:#FEF08A;">(VIỆT NAM)</text>
+              </g>
+
+              <!-- CÁC ĐIỂM ĐÔ THỊ VĂN HÓA LỚN (CITY PINS) -->
+              <!-- Hà Nội -->
+              <g class="city-pin" data-region="bac" transform="translate(255, 140)">
+                <circle cx="0" cy="0" r="5" />
+                <text x="10" y="4">Thủ Đô Hà Nội</text>
+              </g>
+              <!-- Huế -->
+              <g class="city-pin" data-region="trung" transform="translate(325, 345)">
+                <circle cx="0" cy="0" r="4.5" />
+                <text x="10" y="4">Cố Đô Huế</text>
+              </g>
+              <!-- Đà Nẵng -->
+              <g class="city-pin" data-region="trung" transform="translate(350, 375)">
+                <circle cx="0" cy="0" r="4.5" />
+                <text x="10" y="4">Đà Nẵng</text>
+              </g>
+              <!-- TP. Hồ Chí Minh -->
+              <g class="city-pin" data-region="nam" transform="translate(320, 630)">
+                <circle cx="0" cy="0" r="5" />
+                <text x="10" y="4">TP. Hồ Chí Minh</text>
+              </g>
+              <!-- Cần Thơ -->
+              <g class="city-pin" data-region="nam" transform="translate(265, 680)">
+                <circle cx="0" cy="0" r="4.5" />
+                <text x="10" y="4">Cần Thơ</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Bảng thông tin hướng dẫn và chú giải -->
+          <div class="map-sidebar-info">
+            <div class="map-info-badge" id="map-active-region-label">
+              Đang chọn: <strong>Miền Bắc</strong> (🌸 Hoa Đào)
+            </div>
+
+            <div class="map-guide-card">
+              <h4>✨ Cách tương tác bản đồ:</h4>
+              <p>
+                - <strong>Rê chuột (Hover)</strong> vào các vùng miền để xem thời tiết và loài hoa đặc trưng.<br />
+                - <strong>Nhấn chuột (Click)</strong> vào từng vùng để chuyển toàn bộ thông tin chi tiết về phong tục, ẩm thực và kiêng kỵ ngay bên dưới.
+              </p>
+            </div>
+
+            <div class="region-legend">
+              <div class="legend-item" onclick="MapEngine.selectRegion('bac')">
+                <span class="legend-color north"></span>
+                <div class="legend-text">
+                  <strong>Miền Bắc (Sắc Đào Thắm)</strong>
+                  <span>Hà Nội, Vùng Tây Bắc, Đông Bắc, Đồng bằng sông Hồng</span>
+                </div>
+              </div>
+
+              <div class="legend-item" onclick="MapEngine.selectRegion('trung')">
+                <span class="legend-color central"></span>
+                <div class="legend-text">
+                  <strong>Miền Trung (Sắc Vàng Đồng)</strong>
+                  <span>Bắc Trung Bộ, Duyên hải Nam Trung Bộ & Tây Nguyên</span>
+                </div>
+              </div>
+
+              <div class="legend-item" onclick="MapEngine.selectRegion('nam')">
+                <span class="legend-color south"></span>
+                <div class="legend-text">
+                  <strong>Miền Nam (Sắc Mai Rực Rỡ)</strong>
+                  <span>Đông Nam Bộ & Đồng bằng sông Cửu Long trù phú</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MỤC CHI TIẾT VÙNG MIỀN ĐƯỢC CHỌN (REGIONAL SHOWCASE)
+         ========================================================================== -->
+    <section class="region-showcase-section" id="region-showcase">
+      <div class="container" id="region-details-container">
+        <!-- Nội dung sẽ được render tự động và mượt mà bởi App.renderRegionShowcase() -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BỘ SƯU TẬP THẺ PHONG TỤC & MÓN ĂN (CUSTOMS & FOODS GALLERY)
+         ========================================================================== -->
+    <section class="customs-gallery-section" id="customs-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Di Sản & Tập Quán</span>
+          <h2 class="section-title text-gold-gradient">Thẻ Phong Tục & Món Ăn Ngày Tết</h2>
+          <p class="section-subtitle">
+            Khám phá ý nghĩa sâu xa đằng sau từng phong tục truyền thống và những món ngon gắn liền với ký ức Tết quê hương.
+          </p>
+        </div>
+
+        <!-- Thanh tìm kiếm & Bộ lọc nhanh -->
+        <div class="gallery-controls-bar">
+          <div class="filter-chips-group">
+            <button class="filter-chip active" data-filter="all">Tất Cả</button>
+            <button class="filter-chip" data-filter="bac">Miền Bắc</button>
+            <button class="filter-chip" data-filter="trung">Miền Trung</button>
+            <button class="filter-chip" data-filter="nam">Miền Nam</button>
+          </div>
+
+          <div class="search-box-wrap">
+            <span class="search-icon-symbol">🔍</span>
+            <input type="text" class="search-input" id="customs-search-input" placeholder="Tìm phong tục, món ăn, bánh chưng, lì xì..." aria-label="Tìm kiếm phong tục hoặc món ăn" />
+          </div>
+        </div>
+
+        <!-- Lưới thẻ phong tục -->
+        <div class="customs-cards-grid" id="customs-cards-grid">
+          <!-- Render tự động bởi App.renderCustomsGallery() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MỤC SO SÁNH BA MIỀN (TẾT BA MIỀN CÓ GÌ KHÁC NHAU?)
+         ========================================================================== -->
+    <section class="compare-section" id="compare-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Bảng Đối Chiếu Văn Hóa</span>
+          <h2 class="section-title text-gold-gradient">Tết Ba Miền Có Gì Khác Nhau?</h2>
+          <p class="section-subtitle">
+            Mỗi miền một phong vị, từ sắc hoa ngày xuân, món bánh dâng cúng đến quan niệm mâm ngũ quả và nếp kiêng cử đầu năm.
+          </p>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="compare-table" id="comparison-table">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Hạng Mục</th>
+                <th class="col-north" style="width: 26%;">🏔️ Miền Bắc</th>
+                <th class="col-central" style="width: 26%;">🌊 Miền Trung</th>
+                <th class="col-south" style="width: 26%;">🌴 Miền Nam</th>
+                <th style="width: 24%;">Góc Nhìn Văn Hóa</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-table-body">
+              <!-- Render tự động bởi App.renderComparisonTable() -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BỐC QUẺ LÌ XÌ ĐẦU NĂM (LUCKY DRAW)
+         ========================================================================== -->
+    <section class="lucky-draw-section" id="lucky-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Hái Lộc Đầu Xuân</span>
+          <h2 class="section-title text-gold-gradient">Bốc Quẻ Lì Xì May Mắn</h2>
+          <p class="section-subtitle">
+            Chọn một trong những phong bao lì xì đỏ thắm dưới đây để nhận quẻ may mắn, lời chúc xuân cát tường và con số tài lộc cho năm mới!
+          </p>
+        </div>
+
+        <div class="lucky-envelopes-grid" id="lucky-envelopes-grid">
+          <!-- Render tự động bởi App.renderLuckyEnvelopes() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRẮC NGHIỆM: BẠN HỢP VỚI TẾT MIỀN NÀO?
+         ========================================================================== -->
+    <section class="quiz-section" id="quiz-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Khám Phá Bản Thân</span>
+          <h2 class="section-title text-gold-gradient">Bạn Hợp Với Tết Miền Nào Nhất?</h2>
+          <p class="section-subtitle">
+            Trả lời 4 câu hỏi trắc nghiệm vui để tìm ra phong cách Tết hợp với gu ẩm thực và tính cách của bạn nhất!
+          </p>
+        </div>
+
+        <div class="quiz-card-wrapper" id="quiz-box">
+          <!-- Render tự động bởi App.renderQuizStep() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MỤC GIỚI THIỆU & NGUỒN CẢM HỨNG (ABOUT)
+         ========================================================================== -->
+    <section class="about-section" id="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <span class="section-tag">Ý Nghĩa Dự Án</span>
+            <h3 class="text-gold-gradient">Gìn Giữ & Lan Tỏa Bản Sắc Tết Việt</h3>
+            <p>
+              Dự án <strong>“Bản Đồ Tết Việt”</strong> ra đời với tâm huyết tái hiện bức tranh văn hóa ngày Tết Nguyên Đán sống động, chân thực và gần gũi. Dù trải qua bao thăng trầm của thời đại, ngày Tết vẫn luôn là sợi dây thiêng liêng gắn kết triệu trái tim người con đất Việt hướng về cội nguồn.
+            </p>
+            <p>
+              Trang web được thiết kế trực quan, dễ tiếp cận cho học sinh, sinh viên và mọi người yêu mến văn hóa dân tộc, giúp chúng ta thêm trân quý từng nét đẹp truyền thống của ba miền Bắc – Trung – Nam.
+            </p>
+            <div class="author-badge-card" style="margin-top: 1.5rem; padding: 1.25rem; background: rgba(255, 255, 255, 0.05); border-radius: 14px; border: 1px solid var(--border-gold);">
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span style="font-size: 2rem;">👨‍💻</span>
+                <div>
+                  <h4 style="margin: 0; color: var(--gold-pale); font-size: 1.15rem;">Tác giả: Lê Phú Thành</h4>
+                  <p style="margin: 0.25rem 0 0.75rem; font-size: 0.9rem; color: var(--text-muted);">Dự án mã nguồn mở lưu trữ trên GitHub</p>
+                  <a href="https://github.com/thanhlpph51442-png/Lephuthanh" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-gold" style="padding: 0.4rem 1rem; font-size: 0.85rem;">
+                    <span>🔗 GitHub: thanhlpph51442-png/Lephuthanh</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-features">
+            <div class="feature-box">
+              <span class="feat-icon">🗺️</span>
+              <strong>Bản Đồ Tương Tác</strong>
+              <span>Khám phá ba miền trực quan, nhanh chóng trên máy tính & điện thoại.</span>
+            </div>
+
+            <div class="feature-box">
+              <span class="feat-icon">🎋</span>
+              <strong>Phong Tục & Ẩm Thực</strong>
+              <span>Giải thích ý nghĩa nguồn gốc bánh chưng, bánh tét, thịt đông, dưa món...</span>
+            </div>
+
+            <div class="feature-box">
+              <span class="feat-icon">⚖️</span>
+              <strong>Đối Chiếu Văn Hóa</strong>
+              <span>Bảng so sánh chi tiết giúp hiểu sâu sự phong phú của từng địa phương.</span>
+            </div>
+
+            <div class="feature-box">
+              <span class="feat-icon">🧧</span>
+              <strong>Trải Nghiệm Tết Sống Động</strong>
+              <span>Bốc quẻ may mắn, hiệu ứng hoa rơi và âm hưởng chuông khánh truyền thống.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL CHI TIẾT PHONG TỤC & MÓN ĂN
+       ========================================================================== -->
+  <div class="details-modal-backdrop" id="details-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="details-modal-box">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Đóng cửa sổ">✕</button>
+      <div class="modal-header-media">
+        <img src="" alt="" id="modal-img" />
+        <span class="modal-tag" id="modal-tag"></span>
+      </div>
+      <div class="modal-content-inner">
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="modal-quote" id="modal-quote"></p>
+        <div class="modal-meaning" id="modal-meaning"></div>
+        <div id="modal-body-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nút cuộn về đầu trang -->
+  <button class="back-to-top-btn" id="back-to-top-btn" title="Trở về đầu trang" aria-label="Lên đầu trang">
+    ↑
+  </button>
+
+  <!-- ==========================================================================
+       FOOTER CHÂN TRANG
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-quote">
+        “Dù đi đâu, về đâu, hồn Tết Việt vẫn luôn vẹn nguyên trong từng nếp nhà, cành đào, nhành mai và mâm cơm đoàn viên ấm cúng.”
+      </p>
+      <p>© 2026 Bản Đồ Tết Việt - Tác giả: <strong>Lê Phú Thành</strong>.</p>
+      <p style="margin-top: 0.4rem;">
+        <a href="https://github.com/thanhlpph51442-png/Lephuthanh" target="_blank" rel="noopener noreferrer" style="color: var(--gold-light); text-decoration: none; font-weight: 500;">
+          📦 https://github.com/thanhlpph51442-png/Lephuthanh
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SCRIPTS
+       ========================================================================== -->
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/petals.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
